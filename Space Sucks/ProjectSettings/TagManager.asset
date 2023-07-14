@@ -13,34 +13,34 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - fireflies
-  - 
-  - 
-  - 
-  - 
-  - Prey
-  - Predator
-  - Food
-  - Depo
-  - Scurry
-  - Scurry Break
-  - PreyXRay
-  - PredXRay
-  - Terrain
-  - PreyTopLevel
-  - PredatorTopLevel
-  - SmellTrail
-  - FoodSmellTrail
-  - Grass
+  - Vaultable
+  - Wall
+  - Ground
   - 
   - 
   - 
   - 
   - 
-  - PostProcessing
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   m_SortingLayers:
   - name: Default
