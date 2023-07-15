@@ -70,7 +70,7 @@ public class PlayerBody : MonoBehaviour
         left = Input.GetKey(KeyCode.A);
         back = Input.GetKey(KeyCode.S);
         right = Input.GetKey(KeyCode.D);
-        jump = Input.GetKey(KeyCode.Space);
+        jump = Input.GetKeyDown(KeyCode.Space);
         jumpH = Input.GetKey(KeyCode.Y);
         sprint = true;
         crouchH = Input.GetKey(KeyCode.LeftControl);
@@ -251,6 +251,14 @@ public class PlayerBody : MonoBehaviour
     {
         RaycastHit info;
 
+        justJumped-=Time.deltaTime;
+
+        if (justJumped > 0)
+        {
+            grounded = false;
+            return;
+        }
+
         grounded = Physics.Raycast(feet.transform.position + new Vector3(0, 0.2f, 0), -transform.up, out info, 0.3f, ground);
 
         //Debug.Log(info.collider?.name);
@@ -387,6 +395,7 @@ public class PlayerBody : MonoBehaviour
     [Header("Wallrunning")]
     [SerializeField]
     private LayerMask wall;
+    [SerializeField]
     private bool wallRunning; public bool WallRunning { get { return wallRunning; } }
     private Vector3 wallForward; //facing retains original direction you were facing when you hit the wall
     [SerializeField]
@@ -402,7 +411,7 @@ public class PlayerBody : MonoBehaviour
         {
             wallLeft = Physics.Raycast(transform.position, -transform.right, out RaycastHit infoLeft, controller.radius + rayOut, wall);
             wallRight = Physics.Raycast(transform.position, transform.right, out RaycastHit infoRight, controller.radius + rayOut, wall);
-            bool wallInFront = Physics.Raycast(transform.position, transform.forward, out RaycastHit infoInFront, controller.radius + rayOut, wall);
+            //bool wallInFront = Physics.Raycast(transform.position, transform.forward, out RaycastHit infoInFront, controller.radius + rayOut, wall);
 
             if (Vector3.Dot(velocity, infoLeft.normal) > 0) wallLeft = false;
             if (Vector3.Dot(velocity, infoRight.normal) > 0) wallRight = false;
@@ -428,8 +437,10 @@ public class PlayerBody : MonoBehaviour
             {
                 wallForward = Vector3.Cross(transform.up, -infoLeft.normal);
 
-                if (!wallRunning && !hasJump)
+                if (!wallRunning/* && !hasJump*/)
                 {
+                    Debug.Log("attaching to left wall");
+
                     if (jump)
                         hasJump = false;
 
@@ -439,6 +450,8 @@ public class PlayerBody : MonoBehaviour
                     //if you're not moving in the direction of the wallrun fast enough
                     if ((Vector3.Dot(velocity, wallForward) * Vector3.Project(velocity, wallForward).magnitude) < minWallSpeed) // tune min wall speed
                     {
+                        Debug.Log("falling off left wall");
+
                         float tempY = velocity.y;
                         velocity = Vector3.Project(velocity, wallForward);
                         velocity.y = tempY / 2;
@@ -470,6 +483,8 @@ public class PlayerBody : MonoBehaviour
 
                 if (jump && hasJump) //left wall
                 {
+                    Debug.Log("jumping off left wall");
+
                     velocity = Vector3.Project(velocity, wallForward);
                     velocity += infoLeft.normal * ejectionSpeed / 3 * 2;
                     velocity += head.transform.forward * ejectionSpeed / 3;
@@ -479,10 +494,12 @@ public class PlayerBody : MonoBehaviour
                     useGravity = true;
                     hasJump = false;
 
+                    /*
                     Vector3 facing = new Vector3(head.transform.forward.x, 0, head.transform.forward.z);
                     Vector3 bodyDirection = new Vector3(head.transform.rotation.eulerAngles.x, 0, 0);
                     head.transform.rotation = Quaternion.Euler(bodyDirection);
                     transform.forward = facing;
+                    */
 
                     return;
                 }
@@ -490,14 +507,14 @@ public class PlayerBody : MonoBehaviour
                 velocity += (Physics.gravity / 2f) * Time.deltaTime;
 
                 transform.forward = wallForward;
-                Debug.Log("LEFT WALL");
+                //Debug.Log("LEFT WALL");
             }
             else if (wallRight && (forwardBool || wallRunning))
             {
-                Debug.Log("RIGHT WALL");
+                //Debug.Log("RIGHT WALL");
                 wallForward = Vector3.Cross(transform.up, infoRight.normal);
 
-                if (!wallRunning && !hasJump)
+                if (!wallRunning/* && !hasJump*/)
                 {
                     if (jump)
                         hasJump = false;
@@ -508,6 +525,8 @@ public class PlayerBody : MonoBehaviour
                     //if you're not moving in the direction of the wallrun fast enough
                     if ((Vector3.Dot(velocity, wallForward) * Vector3.Project(velocity, wallForward).magnitude) < minWallSpeed) // tune min wall speed
                     {
+                        Debug.Log("falling off right wall");
+
                         float tempY = velocity.y;
                         velocity = Vector3.Project(velocity, wallForward);
                         velocity.y = tempY / 2;
@@ -537,6 +556,8 @@ public class PlayerBody : MonoBehaviour
 
                 if (jump && hasJump)
                 {
+                    Debug.Log("jumping off right wall");
+
                     velocity = Vector3.Project(velocity, wallForward);
                     velocity += infoRight.normal * ejectionSpeed / 3 * 2;
                     velocity += head.transform.forward * ejectionSpeed / 3;
@@ -545,10 +566,12 @@ public class PlayerBody : MonoBehaviour
                     useGravity = true;
                     hasJump = false;
 
+                    /*
                     Vector3 facing = new Vector3(head.transform.forward.x, 0, head.transform.forward.z);
                     Vector3 bodyDirection = new Vector3(head.transform.rotation.eulerAngles.x, 0, 0);
                     head.transform.rotation = Quaternion.Euler(bodyDirection);
                     transform.forward = facing;
+                    */
 
                     return;
                 }

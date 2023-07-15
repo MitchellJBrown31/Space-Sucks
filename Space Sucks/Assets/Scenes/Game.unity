@@ -719,7 +719,7 @@ GameObject:
   - component: {fileID: 945930702}
   - component: {fileID: 945930701}
   m_Layer: 8
-  m_Name: Floorbo
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
