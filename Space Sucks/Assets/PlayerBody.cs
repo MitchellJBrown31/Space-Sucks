@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 public class PlayerBody : MonoBehaviour
@@ -36,9 +37,6 @@ public class PlayerBody : MonoBehaviour
     private bool parkouring = false; // will be used to remove movement while doing a parkour move that uses a coroutine
     public bool Parkouring { get { return parkouring; } }
 
-    [SerializeField]
-    private GameObject ragdollPrefab;
-
     [HideInInspector]
     public bool vault;
     [HideInInspector]
@@ -60,12 +58,24 @@ public class PlayerBody : MonoBehaviour
     [SerializeField]
     private bool hasJump = false;
     private float justJumped = 0f;
-    private float sensitivityMultiplier = 5f;
+    private float sensitivityMultiplier = 1.5f;
     private bool paused;
 
     private void Scan()
     {
+        mouseXInput = Input.GetAxis("Mouse X");
+        mouseYInput = Input.GetAxis("Mouse Y");
 
+        forwardBool = Input.GetKey(KeyCode.W);
+        left = Input.GetKey(KeyCode.A);
+        back = Input.GetKey(KeyCode.S);
+        right = Input.GetKey(KeyCode.D);
+        jump = Input.GetKey(KeyCode.Space);
+        jumpH = Input.GetKey(KeyCode.Y);
+        sprint = true;
+        crouchH = Input.GetKey(KeyCode.LeftControl);
+        crouchT = Input.GetKey(KeyCode.C);
+        interact = Input.GetKey(KeyCode.E);
     }
 
     #endregion
@@ -100,21 +110,13 @@ public class PlayerBody : MonoBehaviour
 
     }
 
-    private void OnDestroy()
-    {
-        for (int i = 0; i < camera.transform.childCount; i++)
-        {
-            Destroy(camera.transform.GetChild(i).gameObject);
-        }
-
-        //if (secretAuth) Managers.Gamemodes.CurrentMode.CmdSpawnRagdoll(baseBody.transform.position, baseBody.transform.rotation, velocity);
-    }
-
     private void Update()
     {
         Scan();
 
-        Look();
+        GJLook();
+
+        GJGrounded();
         Move();
 
         
@@ -122,10 +124,20 @@ public class PlayerBody : MonoBehaviour
 
     private float rotX = 0;
 
-    public Transform CameraTarget { get { return head.transform; } }
+    void GJLook()
+    {
+        transform.Rotate(new Vector3(0, mouseXInput * sensitivityMultiplier, 0));
 
+        camera.transform.Rotate(new Vector3(mouseYInput * sensitivityMultiplier * -1, 0, 0));
+    }
+
+    //public Transform CameraTarget { get { return head.transform; } }
+
+    /*
     private void LateUpdate()
     {
+        // we dont use this (yet)
+
         if (freeCam) return;
         spine0.transform.Rotate(Vector3.right, rotX / 3f);
         spine1.transform.Rotate(Vector3.right, rotX / 3f);
@@ -136,8 +148,10 @@ public class PlayerBody : MonoBehaviour
             camera.transform.Rotate(Vector3.right, -26);
         
     }
+    */
 
     #region Movement
+    [SerializeField]
     private bool wasHoldingCrouch = false, sprinting = false, wasGrounded = true;
 
 
@@ -149,7 +163,7 @@ public class PlayerBody : MonoBehaviour
 
         if (grounded) hasJump = true;
 
-        if (sprint) sprinting = !sprinting;
+        sprinting = true;
 
         Vector3 forward = transform.forward * ((forwardBool ? 1 : 0) - (back ? 1 : 0));
         Vector3 strafeRight = transform.right * ((right ? 1 : 0) - (left ? 1 : 0));
@@ -176,7 +190,7 @@ public class PlayerBody : MonoBehaviour
 
             //baseBody.transform.forward = camera.transform.forward-regOffset;
             //transform.forward = baseBody.transform.forward;
-            baseBody.transform.localRotation = Quaternion.identity;
+            //baseBody.transform.localRotation = Quaternion.identity;
 
             if (jump && sprinting && !parkouring) CheckVault();
         }
@@ -199,8 +213,8 @@ public class PlayerBody : MonoBehaviour
 
             if (jumpH && velocity.y < 2) CheckMuscleUp();
 
-            regOffset = new Vector3(baseBody.transform.forward.x, camera.transform.forward.y, baseBody.transform.forward.z);
-            camera.transform.forward = regOffset;
+            //regOffset = new Vector3(baseBody.transform.forward.x, camera.transform.forward.y, baseBody.transform.forward.z);
+            //camera.transform.forward = regOffset;
 
         }
         if (useGravity) velocity += (Physics.gravity * Time.deltaTime);// + ((grounded && !sliding) ? Physics.gravity * 1f : Vector3.zero);
@@ -233,6 +247,17 @@ public class PlayerBody : MonoBehaviour
     private bool wasOnSlope = false;
     private Vector3 groundNormal;
 
+    private void GJGrounded()
+    {
+        RaycastHit info;
+
+        grounded = Physics.Raycast(feet.transform.position + new Vector3(0, 0.2f, 0), -transform.up, out info, 0.3f, ground);
+
+        //Debug.Log(info.collider?.name);
+
+        //Debug.Log("player is " + (!grounded ? "not " : "") + "grounded");
+    }
+
     private void CheckGrounded()
     {
 
@@ -245,6 +270,7 @@ public class PlayerBody : MonoBehaviour
             0.3f, -transform.up, out groundInfo, jumpHeight / 360, ground);
         else grounded = Physics.SphereCast(feet.transform.position + new Vector3(0, 0.5f, 0),
             0.3f, -transform.up, out groundInfo, jumpHeight / 360, ground);
+
 
         if (grounded) groundNormal = SphereCastNormal(groundInfo, -transform.up);
 
@@ -299,11 +325,7 @@ public class PlayerBody : MonoBehaviour
         grounded = false;
         velocity = new Vector3(velocity.x, jumpHeight, velocity.z);
     }
-    private void CmdUpdateRotX(float rot)
-    {
-        rotX = rot;
-    }
-
+    
     private void Look()
     {
         float oldX = rotX;
@@ -346,7 +368,6 @@ public class PlayerBody : MonoBehaviour
             transform.Rotate(new Vector3(0, mouseX, 0));
             //head.transform.Rotate(new Vector3(-mouseY, 0, 0));
 
-
             rotX -= mouseY;
             if (rotX <= -85) rotX = -85;
             else if (rotX >= 85) rotX = 85;
@@ -359,7 +380,6 @@ public class PlayerBody : MonoBehaviour
             head.transform.localRotation = rot;
         }
         #endregion
-        if (oldX != rotX) CmdUpdateRotX(rotX);
     }
     #endregion
 
@@ -543,7 +563,7 @@ public class PlayerBody : MonoBehaviour
                 useGravity = true;
 
                 //transform.forward = baseBody.transform.forward;
-                baseBody.transform.localRotation = Quaternion.identity;
+                //baseBody.transform.localRotation = Quaternion.identity;
             }
         }
         else
@@ -973,7 +993,7 @@ public class PlayerBody : MonoBehaviour
 
             yield return null;
         }
-        if (landingBoost = false) StartCoroutine(BadLanding());
+        if (!landingBoost) StartCoroutine(BadLanding());
 
     }
 
