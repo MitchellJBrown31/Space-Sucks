@@ -129,6 +129,16 @@ public class PlayerBody : MonoBehaviour
         transform.Rotate(new Vector3(0, mouseXInput * sensitivityMultiplier, 0));
 
         camera.transform.Rotate(new Vector3(mouseYInput * sensitivityMultiplier * -1, 0, 0));
+        //if (camera.transform.rotation.eulerAngles.x > 80) camera.transform.rotation = Quaternion.Euler(80, 0, 0);
+        //if (camera.transform.rotation.eulerAngles.x < -80) camera.transform.rotation = Quaternion.Euler(-80, 0, 0);
+        Quaternion rot = camera.transform.localRotation;
+        if (rot.x > 0.6)
+            rot.x = 0.6f;
+        else if (rot.x < -0.6)
+            rot.x = -0.6f;
+
+        camera.transform.localRotation = rot;
+
     }
 
     //public Transform CameraTarget { get { return head.transform; } }

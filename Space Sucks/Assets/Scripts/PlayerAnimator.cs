@@ -1,17 +1,11 @@
-﻿/*
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Mirror;
-using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerAnimator : NetworkBehaviour
+public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField]
     private PlayerBody body;
-    [SerializeField]
-    private PlayerController ctrl;
     [SerializeField]
     private GameObject movementSetTest;
     [SerializeField]
@@ -31,146 +25,147 @@ public class PlayerAnimator : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!hasAuthority) return;
         if (!test)
         {
             freeToMove = false;
 
-            if (body.Parkouring) ParkourUpdate();
-            else if (body.WallRunning)
+            //if (body.Parkouring) ParkourUpdate();
+            if (body.WallRunning)
             {
-                anim.SetBool("idle", false);
+                anim.SetBool("Idle", false);
 
                 if (body.WallRunLeft)
                 {
-                    anim.SetBool("wallrunLeft", true);
-                    anim.SetBool("wallrunRight", false);
+                    anim.SetBool("WallrunLeft", true);
+                    anim.SetBool("WallrunRight", false);
                 }
                 else
                 {
-                    anim.SetBool("wallrunLeft", false);
-                    anim.SetBool("wallrunRight", true);
+                    anim.SetBool("WallrunLeft", false);
+                    anim.SetBool("WallrunRight", true);
                 }
             }
             else if (body.Sliding)
             {
-                anim.SetBool("idle", false);
+                anim.SetBool("Idle", false);
 
-                anim.SetBool("slide", true);
+                anim.SetBool("Slide", true);
             }
             else
             {
-                #region Regular Input
-                anim.SetBool("slide", false);
-                anim.SetBool("wallrunLeft", false);
-                anim.SetBool("wallrunRight", false);
+                if(body.sprint) anim.SetBool("Running", true);
 
-                freeToMove = true;
+                //#region Regular Input
+                //anim.SetBool("slide", false);
+                //anim.SetBool("wallrunLeft", false);
+                //anim.SetBool("wallrunRight", false);
 
-                x = 0;
-                z = 0;
+                //freeToMove = true;
+
+                //x = 0;
+                //z = 0;
 
                 if (body.jump && wasGrounded) StartCoroutine(Jump());
-                //else anim.SetBool("jump", false); //if the jump anim was called last frame, not again
+                else anim.SetBool("Jump", false); //if the jump anim was called last frame, not again
 
-                if (body.IsGrounded)
-                {
-                    wasGrounded = true;
+                ////if (body.IsGrounded)
+                ////{
+                ////    wasGrounded = true;
 
-                    if (ctrl.Controls.forward) z = 1;
-                    if (ctrl.Controls.right) x = 1;
+                ////    if (ctrl.Controls.forward) z = 1;
+                ////    if (ctrl.Controls.right) x = 1;
 
-                    if (ctrl.Controls.back) z--;
-                    if (ctrl.Controls.left) x--;
-                }
-                else
-                {
-                    wasGrounded = false;
-                }
+                ////    if (ctrl.Controls.back) z--;
+                ////    if (ctrl.Controls.left) x--;
+                ////}
+                ////else
+                ////{
+                ////    wasGrounded = false;
+                ////}
 
-                if (body.Sprinting && z > 0) anim.SetFloat("Z", z + 1);
-                else anim.SetFloat("Z", z);
+                //if (body.Sprinting && z > 0) anim.SetFloat("Z", z + 1);
+                //else anim.SetFloat("Z", z);
 
-                anim.SetFloat("X", x);
+                //anim.SetFloat("X", x);
 
-                if (z <= deadzone && x <= deadzone)
-                {
-                    if (z >= 0 - deadzone && x >= 0 - deadzone) anim.SetBool("idle", true);
-                    else anim.SetBool("idle", false);
-                }
-                else anim.SetBool("idle", false);
+                //if (z <= deadzone && x <= deadzone)
+                //{
+                //    if (z >= 0 - deadzone && x >= 0 - deadzone) anim.SetBool("idle", true);
+                //    else anim.SetBool("idle", false);
+                //}
+                //else anim.SetBool("idle", false);
 
-                #endregion
+                //#endregion
 
-                #region Crouch
+                //#region Crouch
 
-                if (body.Crouching)
-                {
-                    anim.SetBool("idle", false);
+                //if (body.Crouching)
+                //{
+                //    anim.SetBool("idle", false);
 
-                    anim.SetBool("crouch", true);
+                //    anim.SetBool("crouch", true);
 
-                    wasCrouched = true;
-                }
-                else
-                {
-                    anim.SetBool("crouch", false);
-                    if (wasCrouched)
-                    {
-                        StartCoroutine(Uncrouch());
-                    }
+                //    wasCrouched = true;
+                //}
+                //else
+                //{
+                //    anim.SetBool("crouch", false);
+                //    if (wasCrouched)
+                //    {
+                //        StartCoroutine(Uncrouch());
+                //    }
 
-                }
+                //}
 
-                #endregion
+                //#endregion
 
-                #region Reload
+                //#region Reload
 
-                if (body.GlockReload && !isReloading)
-                {
-                    StartCoroutine(GlockReload());
-                }
-                else if (body.M16Reload && !isReloading)
-                {
-                    StartCoroutine(M16Reload());
-                    StartCoroutine(M16MagReload());
-                }
-                else if (body.AkReload && !isReloading)
-                {
-                    StartCoroutine(AkReload());
-                    StartCoroutine(AkMagReload());
-                }
+                //if (body.GlockReload && !isReloading)
+                //{
+                //    StartCoroutine(GlockReload());
+                //}
+                //else if (body.M16Reload && !isReloading)
+                //{
+                //    StartCoroutine(M16Reload());
+                //    StartCoroutine(M16MagReload());
+                //}
+                //else if (body.AkReload && !isReloading)
+                //{
+                //    StartCoroutine(AkReload());
+                //    StartCoroutine(AkMagReload());
+                //}
 
-                #endregion
+                //#endregion
 
-                #region Shoot
+                //#region Shoot
 
-                if (body.GlockShoot)
-                {
-                    anim.SetBool("GlockShoot", true);
-                }
-                else
-                {
-                    anim.SetBool("GlockShoot", false);
-                }
-                if (body.M16Shoot)
-                {
-                    anim.SetBool("M16Shoot", true);
-                }
-                else
-                {
-                    anim.SetBool("M16Shoot", false);
-                }
-                if (body.AkShoot)
-                {
-                    anim.SetBool("AkShoot", true);
-                }
-                else
-                {
-                    anim.SetBool("AkShoot", false);
-                }
+                //if (body.GlockShoot)
+                //{
+                //    anim.SetBool("GlockShoot", true);
+                //}
+                //else
+                //{
+                //    anim.SetBool("GlockShoot", false);
+                //}
+                //if (body.M16Shoot)
+                //{
+                //    anim.SetBool("M16Shoot", true);
+                //}
+                //else
+                //{
+                //    anim.SetBool("M16Shoot", false);
+                //}
+                //if (body.AkShoot)
+                //{
+                //    anim.SetBool("AkShoot", true);
+                //}
+                //else
+                //{
+                //    anim.SetBool("AkShoot", false);
+                //}
 
-                #endregion
+                //#endregion
             }
             anim.SetBool("free", freeToMove);
         }
@@ -242,73 +237,72 @@ public class PlayerAnimator : NetworkBehaviour
         yield return null;
     }
 
-    #region WeaponAnimationCoroutine
-    private IEnumerator GlockReload()
-    {
+    //#region WeaponAnimationCoroutine
+    //private IEnumerator GlockReload()
+    //{
 
-        anim.SetBool("GlockReload", true);
-        isReloading = true;
+    //    anim.SetBool("GlockReload", true);
+    //    isReloading = true;
 
-        yield return new WaitForSeconds(1.14f);
+    //    yield return new WaitForSeconds(1.14f);
 
-        anim.SetBool("GlockReload", false);
-        isReloading = false;
-        body.GlockReload = false;
-    }
+    //    anim.SetBool("GlockReload", false);
+    //    isReloading = false;
+    //    body.GlockReload = false;
+    //}
 
-    private IEnumerator AkReload()
-    {
+    //private IEnumerator AkReload()
+    //{
 
-        anim.SetBool("AkReload", true);
-        isReloading = true;
+    //    anim.SetBool("AkReload", true);
+    //    isReloading = true;
 
-        yield return new WaitForSeconds(1.14f);
+    //    yield return new WaitForSeconds(1.14f);
 
-        anim.SetBool("AkReload", false);
-        isReloading = false;
-        body.AkReload = false;
-    }
+    //    anim.SetBool("AkReload", false);
+    //    isReloading = false;
+    //    body.AkReload = false;
+    //}
 
-    private IEnumerator M16Reload()
-    {
+    //private IEnumerator M16Reload()
+    //{
 
-        anim.SetBool("M16Reload", true);
-        isReloading = true;
+    //    anim.SetBool("M16Reload", true);
+    //    isReloading = true;
 
-        yield return new WaitForSeconds(1.14f);
+    //    yield return new WaitForSeconds(1.14f);
 
-        anim.SetBool("M16Reload", false);
-        isReloading = false;
-        body.M16Reload = false;
-    }
+    //    anim.SetBool("M16Reload", false);
+    //    isReloading = false;
+    //    body.M16Reload = false;
+    //}
 
-    private IEnumerator M16MagReload()
-    {
+    //private IEnumerator M16MagReload()
+    //{
 
-        yield return new WaitForSeconds(0.055f);
+    //    yield return new WaitForSeconds(0.055f);
 
-        m16Magazine.SetActive(false);
-        m16MagazineLeft.SetActive(true);
+    //    m16Magazine.SetActive(false);
+    //    m16MagazineLeft.SetActive(true);
 
-        yield return new WaitForSeconds(2.02f);
+    //    yield return new WaitForSeconds(2.02f);
 
-        m16Magazine.SetActive(true);
-        m16MagazineLeft.SetActive(false);
-    }
-    private IEnumerator AkMagReload()
-    {
+    //    m16Magazine.SetActive(true);
+    //    m16MagazineLeft.SetActive(false);
+    //}
+    //private IEnumerator AkMagReload()
+    //{
 
-        yield return new WaitForSeconds(0.51f);
+    //    yield return new WaitForSeconds(0.51f);
 
-        akMagazine.SetActive(false);
-        akMagazineLeft.SetActive(true);
+    //    akMagazine.SetActive(false);
+    //    akMagazineLeft.SetActive(true);
 
-        yield return new WaitForSeconds(1.52f);
+    //    yield return new WaitForSeconds(1.52f);
 
-        akMagazine.SetActive(true);
-        akMagazineLeft.SetActive(false);
-    }
-    #endregion
+    //    akMagazine.SetActive(true);
+    //    akMagazineLeft.SetActive(false);
+    //}
+    //#endregion
 
 }
-*/
