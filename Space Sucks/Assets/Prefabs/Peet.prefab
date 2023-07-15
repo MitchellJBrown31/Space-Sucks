@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 436796727843376671}
   - component: {fileID: 436796727843376670}
   - component: {fileID: 436796727843376669}
+  - component: {fileID: -1421649043144245230}
   m_Layer: 0
   m_Name: Peet
   m_TagString: Player
@@ -439,6 +440,26 @@ MonoBehaviour:
   rooms:
   - {fileID: 5811519504381940426, guid: d6038a48c2abddf47be679c1b05523d0, type: 3}
   liveRooms: []
+--- !u!95 &-1421649043144245230
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436796727843376676}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 550fde51b619b62478870daf65f09b88, type: 3}
+  m_Controller: {fileID: 9100000, guid: b1a5b4a29dd8d5a42a01e31fb6ea9844, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &436796727854120300
 GameObject:
   m_ObjectHideFlags: 0
