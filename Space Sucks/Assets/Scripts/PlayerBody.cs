@@ -193,7 +193,7 @@ public class PlayerBody : MonoBehaviour
             //transform.forward = baseBody.transform.forward;
             //baseBody.transform.localRotation = Quaternion.identity;
 
-            if (jump && sprinting && !parkouring) CheckVault();
+            //if (jump && sprinting && !parkouring) CheckVault();
         }
         else if (!wallRunning && !parkouring) //mid-air
         {
@@ -212,7 +212,7 @@ public class PlayerBody : MonoBehaviour
             }
             else if ((!crouchH && wasHoldingCrouch) || (crouchT)) Uncrouch();
 
-            if (jumpH && velocity.y < 2) CheckMuscleUp();
+            //if (jumpH && velocity.y < 2) CheckMuscleUp();
 
             //regOffset = new Vector3(baseBody.transform.forward.x, camera.transform.forward.y, baseBody.transform.forward.z);
             //camera.transform.forward = regOffset;
@@ -232,7 +232,7 @@ public class PlayerBody : MonoBehaviour
         if (grounded) wasGrounded = true;
         else wasGrounded = false;
 
-        if (grounded && !wasGrounded) StartCoroutine(Landing());
+        //if (grounded && !wasGrounded) StartCoroutine(Landing()); // not for this version
     }
 
     [SerializeField]
@@ -471,7 +471,7 @@ public class PlayerBody : MonoBehaviour
                     velocity.z = 0f;
 
                     velocity -= infoLeft.normal * 3f;
-                    velocity += wallForward * maxSpeed;
+                    velocity += wallForward * maxSpeed * slideBoostMultiplier * slideBoostMultiplier;
 
                     Vector3 facing = transform.forward;
                     transform.forward = wallForward;
@@ -546,7 +546,7 @@ public class PlayerBody : MonoBehaviour
                     velocity.z = 0f;
 
                     velocity -= infoRight.normal * 3f;
-                    velocity += wallForward * maxSpeed;
+                    velocity += wallForward * maxSpeed * slideBoostMultiplier * slideBoostMultiplier;
 
                     Vector3 facing = transform.forward;
                     transform.forward = wallForward;
@@ -611,7 +611,8 @@ public class PlayerBody : MonoBehaviour
     private bool crouching, sliding;
     public bool Crouching { get { return crouching; } }
     public bool Sliding { get { return sliding; } }
-    private float slideDecrement = 0.66f;
+    [SerializeField]
+    private float slideDecrement = 0.50f, slideBoostMultiplier = 1.5f;
     void Crouch()
     {
         crouching = true;
@@ -655,7 +656,7 @@ public class PlayerBody : MonoBehaviour
 
         Vector2 xzVel = new Vector2(velocity.x, velocity.z).normalized;
 
-        xzVel = xzVel * sprintMaxSpeed * 1.35f; //or currSpeed instead of sprintmax, whichever is lower
+        xzVel = xzVel * sprintMaxSpeed * slideBoostMultiplier; //or currSpeed instead of sprintmax, whichever is lower
 
         velocity.x = xzVel.x;
 
@@ -717,6 +718,7 @@ public class PlayerBody : MonoBehaviour
 
     private void CheckMuscleUp()
     {
+        return; // we don't wanna use this anymore
         //redo, as follows:
         /*
          cast ray from highest (0.25m in front of player), straight down (layermask ground).
@@ -879,6 +881,8 @@ public class PlayerBody : MonoBehaviour
     RaycastHit vaultInfo;
     public void CheckVault()
     {
+        return; // we don't wanna do this anymore
+
         if (Physics.Raycast(waist.position + new Vector3(0, -0.35f, 0), waist.forward, out vaultInfo, 2))
         {
 
