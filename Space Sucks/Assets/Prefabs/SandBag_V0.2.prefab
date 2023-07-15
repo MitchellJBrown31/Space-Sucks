@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7264025923182665319}
   - component: {fileID: 6008042156680745410}
   - component: {fileID: 8395885957820704008}
+  - component: {fileID: 4147331970723682061}
   m_Layer: 0
   m_Name: SandBag_V0.2
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4147331970723682061
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8035778239114265821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03791041, y: 0.06139697, z: 0.01401345}
+  m_Center: {x: -0.0007626116, y: 0.00008875503, z: -0.00018156666}

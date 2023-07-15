@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8960794060612014365}
   - component: {fileID: 5473273421217046200}
   - component: {fileID: 7786739580063607410}
+  - component: {fileID: 4882667391242664644}
   m_Layer: 0
   m_Name: CementPillar
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4882667391242664644
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8579623459238562727}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02, y: 0.020000007, z: 0.020000005}
+  m_Center: {x: 0, y: 0, z: 0}
