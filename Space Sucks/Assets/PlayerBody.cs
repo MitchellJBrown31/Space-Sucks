@@ -163,7 +163,8 @@ public class PlayerBody : MonoBehaviour
 
         if (grounded) hasJump = true;
 
-        sprinting = true;
+        sprinting = forwardBool;
+        
 
         Vector3 forward = transform.forward * ((forwardBool ? 1 : 0) - (back ? 1 : 0));
         Vector3 strafeRight = transform.right * ((right ? 1 : 0) - (left ? 1 : 0));
@@ -620,8 +621,8 @@ public class PlayerBody : MonoBehaviour
         //legs.SetActive(false);
 
         controller.height = 1;
-        controller.center = new Vector3(0, 0.7f, 0);
-        gameObject.transform.Translate(0, -0.3f, 0);
+        controller.center = new Vector3(0, 0.2f, 0);
+        transform.Translate(0, 0.3f, 0);
 
         //if sprinting Slide()
         if (sprinting) StartCoroutine(StartSlide());
@@ -640,7 +641,7 @@ public class PlayerBody : MonoBehaviour
         //legs.SetActive(true);
 
         controller.height = 2f;
-        controller.center = new Vector3(0, 1f, 0);
+        controller.center = new Vector3(0, 0, 0);
         gameObject.transform.Translate(0, 1, 0);
 
         //if sliding return to sprint -> Unslide();
@@ -660,7 +661,8 @@ public class PlayerBody : MonoBehaviour
 
         velocity.z = xzVel.y;
 
-        controller.center = new Vector3(0, 1.2f, 0);
+        controller.height = 1f;
+        controller.center = new Vector3(0, 0.2f, 0);
 
         yield return null;
 
@@ -669,6 +671,10 @@ public class PlayerBody : MonoBehaviour
     {
         grounded = Physics.SphereCast(physicalHips.position + new Vector3(0, 0.3f, 0),
             0.3f, -transform.up, out groundInfo, jumpHeight / 60, ground);
+
+        //gj
+        grounded = Physics.Raycast(waist.transform.position + new Vector3(0, 0.1f, 0), -transform.up, 0.3f, ground);
+        Debug.Log($"Grounded sliding: {grounded}");
     }
     private void Slide() // this function is only called if(sliding && grounded) so that you don't lose speed in the air; may have jumping end all slides/crouches, but being airborne won't prevent starting one
     {
@@ -690,7 +696,9 @@ public class PlayerBody : MonoBehaviour
         sliding = false;
         //head.transform.Translate(new Vector3(0, 0.3f, 0));
 
-        controller.center = new Vector3(0, 1, 0);
+        controller.height = 2f;
+        controller.center = new Vector3(0, 0, 0);
+        gameObject.transform.Translate(0, 1, 0);
 
         yield return null;
     }
