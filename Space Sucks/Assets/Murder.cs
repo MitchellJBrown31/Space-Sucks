@@ -14,7 +14,7 @@ public class Murder : MonoBehaviour
         {
             if (GameObject.FindGameObjectWithTag("Player").transform.position.y - transform.position.y > 1) Lose();
         }
-        if(duration<-3)
+        if(duration<-30)
             GameObject.Destroy(gameObject);
 
     }
