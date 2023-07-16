@@ -74,7 +74,7 @@ public class PlayerBody : MonoBehaviour
         jumpH = Input.GetKey(KeyCode.Y);
         sprint = true;
         crouchH = Input.GetKey(KeyCode.LeftControl);
-        crouchT = Input.GetKey(KeyCode.C);
+        crouchT = false;
         interact = Input.GetKey(KeyCode.E);
     }
 
