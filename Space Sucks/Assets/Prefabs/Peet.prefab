@@ -440,6 +440,7 @@ MonoBehaviour:
   flipped: 0
   rooms:
   - {fileID: 5811519504381940426, guid: d6038a48c2abddf47be679c1b05523d0, type: 3}
+  - {fileID: 5811519504381940426, guid: 7b241b72f579644488dbf4ca69dadae2, type: 3}
   liveRooms: []
 --- !u!95 &-1421649043144245230
 Animator:
