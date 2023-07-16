@@ -22,6 +22,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField]
     private bool test;
 
+
     // Update is called once per frame
     void Update()
     {
