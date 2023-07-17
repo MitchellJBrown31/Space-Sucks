@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuNav : MonoBehaviour
 {
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void Quit()
     {
         Application.Quit();
