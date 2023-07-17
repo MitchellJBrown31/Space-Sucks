@@ -168,7 +168,7 @@ public class PlayerAnimator : MonoBehaviour
 
                 //#endregion
             }
-            anim.SetBool("free", freeToMove);
+            //anim.SetBool("free", freeToMove);
         }
     }
 

@@ -30,7 +30,7 @@ public class RoomManager : MonoBehaviour
         if(flipped) tile.transform.Rotate(new Vector3(0, 180, 0));
 
         liveRooms.Add(tile);
-        if (liveRooms.Count > 3)
+        if (liveRooms.Count > 4)
         {
             GameObject.Destroy(liveRooms[0]);
             liveRooms.RemoveAt(0);

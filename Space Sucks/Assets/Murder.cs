@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Murder : MonoBehaviour
 {
@@ -15,12 +16,14 @@ public class Murder : MonoBehaviour
             if (GameObject.FindGameObjectWithTag("Player").transform.position.y - transform.position.y > 1) Lose();
         }
         if(duration<-30)
-            GameObject.Destroy(gameObject);
+            GameObject.Destroy(transform.parent.gameObject);
 
     }
 
     private void Lose()
     {
         Debug.Log("You Lose");
+        SceneManager.LoadScene("Credits", LoadSceneMode.Single);
+        //load credits
     }
 }
