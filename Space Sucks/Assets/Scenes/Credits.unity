@@ -1245,7 +1245,10 @@ MonoBehaviour:
     Font - Indra Gunawan, https://www.dafont.com/brick-wall.font
 
     Player Model
-    - '
+    - Pete Mixamo Model, https://www.mixamo.com/#/?page=1&query=construction+worker&type=Character
+
+    Sound
+    Effects and Music - Freesound.org under Creative Commons 0 License'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
