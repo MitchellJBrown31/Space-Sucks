@@ -2953,7 +2953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 436796727843376669, guid: ee61aa9c425a67c4db630d2eabd6b7cf, type: 3}
       propertyPath: rooms.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 436796727843376669, guid: ee61aa9c425a67c4db630d2eabd6b7cf, type: 3}
       propertyPath: rooms.Array.data[0]
@@ -2971,6 +2971,14 @@ PrefabInstance:
       propertyPath: rooms.Array.data[3]
       value: 
       objectReference: {fileID: 5574725871840816566, guid: 0369ab3d5021d444688a10f75fe7fdba, type: 3}
+    - target: {fileID: 436796727843376669, guid: ee61aa9c425a67c4db630d2eabd6b7cf, type: 3}
+      propertyPath: rooms.Array.data[4]
+      value: 
+      objectReference: {fileID: 5574725871840816566, guid: 0369ab3d5021d444688a10f75fe7fdba, type: 3}
+    - target: {fileID: 436796727843376669, guid: ee61aa9c425a67c4db630d2eabd6b7cf, type: 3}
+      propertyPath: rooms.Array.data[5]
+      value: 
+      objectReference: {fileID: 5811519504381940426, guid: 434b5883371353943a0eb759f93713e4, type: 3}
     - target: {fileID: 436796727843376676, guid: ee61aa9c425a67c4db630d2eabd6b7cf, type: 3}
       propertyPath: m_Name
       value: Player

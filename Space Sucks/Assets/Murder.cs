@@ -22,7 +22,7 @@ public class Murder : MonoBehaviour
 
     private void Lose()
     {
-        Debug.Log("You Lose");
+        Debug.Log("You Lose. from the "+transform.position.y/-20.5f +" th floor");
         SceneManager.LoadScene("Credits", LoadSceneMode.Single);
         //load credits
     }

@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 23016
+  controlID: 28913
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -45,8 +45,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 485
-    y: 73
+    x: 486
+    y: 19
     width: 979
     height: 540
   m_ViewDataDictionary: {fileID: 0}
@@ -86,7 +86,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -95,23 +95,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 979
-      height: 519
-    m_Scale: {x: 0.48055556, y: 0.48055556}
-    m_Translation: {x: 489.5, y: 259.5}
+      width: 1920
+      height: 907
+    m_Scale: {x: 0.83981484, y: 0.83981484}
+    m_Translation: {x: 960, y: 453.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1018.6127
+      x: -1143.1091
       y: -540
-      width: 2037.2253
+      width: 2286.2183
       height: 1080
     m_MinimalGUI: 1
-  m_defaultScale: 0.48055556
-  m_LastWindowPixelSize: {x: 979, y: 540}
+  m_defaultScale: 0.83981484
+  m_LastWindowPixelSize: {x: 1920, y: 928}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 22924
+  controlID: 28914
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 22925
+  controlID: 28915
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,9 +224,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: baaef5ffbcaef5ffea6ef7ff684dfaff6a4dfaffcc4efaff687bfaff2a7efaff0e8dfaff008efaff52a1faffcca4faff42befaff42c0faff3adbfaffc4e1faff5af0faff20f1faffd0e4ffff12e5ffffcee9ffffd0e9ffff7e630100ba63010038640100a27501001279010042790100067a0100e67d010064870100a8200200
+      m_SelectedIDs: 4a4f0400
+      m_LastClickedID: 282442
+      m_ExpandedIDs: 0849f0ff1a1ff4ff1c1ff4ffbaaef5ffbcaef5ffea6ef7ff684dfaff6a4dfaffcc4efaff687bfaff2a7efaff0e8dfaff008efaff52a1faffcca4faff42befaff42c0faff3adbfaffc4e1faff5af0faff20f1faffd0e4ffff12e5ffffcee9ffffd0e9ffff7e630100ba63010038640100a27501001279010042790100067a0100e67d010064870100a8200200724f0400
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -606,9 +606,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.26181072, y: 0.6761138, z: -0.2817737, w: -0.62843174}
+    m_Target: {x: -0.01374203, y: 0.98129547, z: -0.17584392, w: -0.077041276}
     speed: 2
-    m_Value: {x: -0.26181072, y: 0.67611384, z: -0.28177372, w: -0.6284318}
+    m_Value: {x: -0.01374203, y: 0.98129547, z: -0.17584392, w: -0.077041276}
   m_Size:
     m_Target: 10.472408
     speed: 2
@@ -705,13 +705,13 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Mitchell\Desktop\School\PORTFOLIO\Projects\Game Jams\Artists
     Tavern\Space-Sucks\Space Sucks
@@ -719,8 +719,8 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 60}
-    m_SelectedIDs: a48a0000
-    m_LastClickedID: 35492
+    m_SelectedIDs: a68a0000
+    m_LastClickedID: 35494
     m_ExpandedIDs: 00000000f688000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -774,8 +774,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 4a4f0400
+    m_LastClickedInstanceID: 282442
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300007e790000
     m_RenameOverlay:
