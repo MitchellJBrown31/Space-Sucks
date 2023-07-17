@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Murder : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class Murder : MonoBehaviour
     private void Lose()
     {
         Debug.Log("You Lose");
-
+        SceneManager.LoadScene("Credits", LoadSceneMode.Single);
         //load credits
     }
 }

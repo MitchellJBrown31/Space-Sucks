@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Sticky : MonoBehaviour
 {
@@ -9,11 +10,11 @@ public class Sticky : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
 
-        if (other.tag == "Player") other.gameObject.GetComponent<PlayerBody>().sprintMaxSpeed *= 0.25f;
+        if (other.tag == "Player") Lose(); //lose
     }
 
-    public void OnTriggerExit(Collider other)
+    void Lose()
     {
-        if (other.tag == "Player") other.gameObject.GetComponent<PlayerBody>().sprintMaxSpeed *= 4.0f;
+        SceneManager.LoadScene("Credits", LoadSceneMode.Single);
     }
 }
