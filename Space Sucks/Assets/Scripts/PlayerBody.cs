@@ -29,7 +29,7 @@ public class PlayerBody : MonoBehaviour
     //private PlayerDebugger debugger;
     // Movement
     [SerializeField]
-    private float accel = 5f, maxSpeed = 3f, sprintAccel = 10f, sprintMaxSpeed = 6f, crouchAccel = 5f, crouchMaxSpeed = 5.5f, jumpHeight = 7f;
+    public float accel = 5f, maxSpeed = 3f, sprintAccel = 10f, sprintMaxSpeed = 6f, crouchAccel = 5f, crouchMaxSpeed = 5.5f, jumpHeight = 7f;
     private bool grounded;
     public bool IsGrounded { get { return grounded; } }
     public bool Sprinting { get { return sprinting; } }
@@ -685,7 +685,7 @@ public class PlayerBody : MonoBehaviour
 
         //gj
         grounded = Physics.Raycast(waist.transform.position + new Vector3(0, 0.1f, 0), -transform.up, 0.3f, ground);
-        Debug.Log($"Grounded sliding: {grounded}");
+        //Debug.Log($"Grounded sliding: {grounded}");
     }
     private void Slide() // this function is only called if(sliding && grounded) so that you don't lose speed in the air; may have jumping end all slides/crouches, but being airborne won't prevent starting one
     {

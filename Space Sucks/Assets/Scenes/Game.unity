@@ -847,6 +847,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1720758662180581699, guid: 7b241b72f579644488dbf4ca69dadae2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847782581956243836, guid: 7b241b72f579644488dbf4ca69dadae2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5811519504381940426, guid: 7b241b72f579644488dbf4ca69dadae2, type: 3}
       propertyPath: m_Name
       value: Floor1

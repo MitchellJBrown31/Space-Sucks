@@ -15,12 +15,14 @@ public class Murder : MonoBehaviour
             if (GameObject.FindGameObjectWithTag("Player").transform.position.y - transform.position.y > 1) Lose();
         }
         if(duration<-30)
-            GameObject.Destroy(gameObject);
+            GameObject.Destroy(transform.parent.gameObject);
 
     }
 
     private void Lose()
     {
         Debug.Log("You Lose");
+
+        //load credits
     }
 }

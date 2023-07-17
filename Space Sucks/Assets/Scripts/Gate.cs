@@ -8,7 +8,7 @@ public class Gate : MonoBehaviour
     {
         //if (other.tag != "Player") return;
 
-        RoomManager.Instance.roomOffset += new Vector3(0, -20, 0);
+        RoomManager.Instance.roomOffset += new Vector3(0, -20.5f, 0);
         RoomManager.Instance.flipped = !RoomManager.Instance.flipped;
         RoomManager.Instance.LoadNextRoom();
     }
